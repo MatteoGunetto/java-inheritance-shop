@@ -6,8 +6,8 @@ class Prodotto {
     private final int codice;
     private String nome;
     private String descrizione;
-    private double prezzo;
-    private double iva;
+    private final double prezzo;
+    private  final double iva;
 
     public Prodotto(String nome, String descrizione, double prezzo, double iva) {
         this.codice = codiceRandom();
@@ -61,77 +61,8 @@ class Prodotto {
     }
 }
 
-class Smartphone extends Prodotto {
-    private String imei;
-    private int memoriaGB;
 
-    public Smartphone( String nome, String descrizione, double prezzo, double iva, String imei, int memoriaGB) {
-        super( nome, descrizione, prezzo, iva);
-        this.imei = imei;
-        this.memoriaGB = memoriaGB;
-    }
 
-    @Override
-    public double getPrezzoScontato(boolean tesseraFedelta) {
-        double scontoBase = tesseraFedelta ? 0.02 : 0.0;
-        double scontoMemoria = (memoriaGB < 32) ? 0.0 : 0.05;
-        return getPrezzo() - (getPrezzo() * (scontoBase + scontoMemoria));
-    }
 
-    @Override
-    public String toString() {
-        return super.toString() +
-                "\nIMEI: " + imei +
-                "\nMemoria: " + memoriaGB + "GB";
-    }
-}
 
-class Televisore extends Prodotto {
-    private String dimensioni;
-    private boolean smart;
 
-    public Televisore( String nome, String descrizione, double prezzo, double iva, String dimensioni, boolean smart) {
-        super( nome, descrizione, prezzo, iva);
-        this.dimensioni = dimensioni;
-        this.smart = smart;
-    }
-
-    @Override
-    public double getPrezzoScontato(boolean tesseraFedelta) {
-        double scontoBase = tesseraFedelta ? 0.02 : 0.0;
-        double scontoSmart = (smart) ? 0.0 : 0.10;
-        return getPrezzo() - (getPrezzo() * (scontoBase + scontoSmart));
-    }
-
-    @Override
-    public String toString() {
-        return super.toString() +
-                "\nDimensioni: " + dimensioni +
-                "\nSmart TV: " + (smart ? "Si" : "No");
-    }
-}
-
-class Cuffie extends Prodotto {
-    private String colore;
-    private boolean connessione;
-
-    public Cuffie( String nome, String descrizione, double prezzo, double iva, String colore, boolean connessione) {
-        super( nome, descrizione, prezzo, iva);
-        this.colore = colore;
-        this.connessione = connessione;
-    }
-
-    @Override
-    public double getPrezzoScontato(boolean tesseraFedelta) {
-        double scontoBase = tesseraFedelta ? 0.02 : 0.0;
-        double scontoCablate = (connessione) ? 0.0 : 0.07 ;
-        return getPrezzo() - (getPrezzo() * (scontoBase + scontoCablate));
-    }
-
-    @Override
-    public String toString() {
-        return super.toString() +
-                "\nColore: " + colore +
-                "\nWireless: " + (connessione ? "Si" : "No");
-    }
-}
